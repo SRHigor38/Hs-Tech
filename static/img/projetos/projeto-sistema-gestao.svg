@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+    <defs>
+        <linearGradient id="grad" x1="0" y1="0" x2="600" y2="400">
+            <stop stop-color="#0A84FF" stop-opacity="0.8"/>
+            <stop offset="1" stop-color="#6DC5FF" stop-opacity="0.4"/>
+        </linearGradient>
+    </defs>
+    <rect width="600" height="400" fill="#050507"/>
+    <rect width="600" height="400" fill="url(#grad)" opacity="0.3"/>
+    <rect x="50" y="50" width="500" height="300" rx="16" fill="none" stroke="#0A84FF" stroke-width="2" opacity="0.5"/>
+    <text x="300" y="185" text-anchor="middle" font-family="Arial" font-size="28" font-weight="bold" fill="#FFFFFF">Sistema de Gestão</text>
+    <text x="300" y="220" text-anchor="middle" font-family="Arial" font-size="16" fill="#6DC5FF">Projeto HS Tech</text>
+    <path d="M0 400 L100 300 L200 340 L300 250 L400 300 L500 220 L600 280 L600 400 Z" fill="#0A84FF" opacity="0.3"/>
+</svg>

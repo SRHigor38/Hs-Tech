@@ -1,0 +1,87 @@
+/* ══════════════════════════════════════════════
+   HS TECH — ANIMAÇÕES (KEYFRAMES + SCROLL REVEAL)
+   ══════════════════════════════════════════════ */
+
+/* ─── Keyframes ─── */
+
+/* Glow pulsante (botões neon) */
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 20px var(--glow-primario),
+            0 0 40px var(--glow-primario);
+    }
+    50% {
+        box-shadow:
+            0 0 30px var(--glow-neon),
+            0 0 60px var(--glow-neon);
+    }
+}
+
+/* Flutuação suave (elementos decorativos) */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Pulso do WhatsApp */
+@keyframes whatsapp-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7);
+    }
+}
+
+/* Rotação (spinner) */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal--visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Variações de direção */
+.reveal--left {
+    transform: translateX(-30px);
+}
+
+.reveal--right {
+    transform: translateX(30px);
+}
+
+.reveal--scale {
+    transform: scale(0.95);
+}
+
+.reveal--visivel.reveal--left,
+.reveal--visivel.reveal--right,
+.reveal--visivel.reveal--scale {
+    transform: translate(0) scale(1);
+}
+
+/* ─── Delay utilitário ─── */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }

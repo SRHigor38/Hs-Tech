@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Página não encontrada | HS Tech{% endblock %}
+{% block description %}A página que você procura não existe ou foi movida. Volte para a página inicial da HS Tech.{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container error-page__inner">
+        <div class="error-page__code">404</div>
+        <h1 class="error-page__title">Página não encontrada</h1>
+        <p class="error-page__description">
+            Ops! A página que você procura não existe ou foi movida.
+            Que tal voltar para a página inicial?
+        </p>
+        <div class="error-page__actions">
+            <a href="{{ url_for('main.home') }}" class="btn btn--primary">Voltar para a Home</a>
+            <a href="{{ url_for('main.contato') }}" class="btn btn--outline">Falar com a equipe</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

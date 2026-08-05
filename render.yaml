@@ -1,0 +1,23 @@
+# ══════════════════════════════════════════════
+# HS Tech — Configuração de Deploy no Render
+# ══════════════════════════════════════════════
+
+services:
+  - type: web
+    name: hs-tech
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.13.3

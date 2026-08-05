@@ -1,0 +1,33 @@
+/* ══════════════════════════════════════════════
+   HS TECH — FONTES (SELF-HOSTED)
+   ══════════════════════════════════════════════ */
+
+/*
+   As fontes são self-hosted em /static/fonts/.
+
+   Para adicionar as fontes reais:
+   1. Baixe Sora e Inter (variable fonts) em https://fonts.google.com
+   2. Coloque os .woff2 em static/fonts/
+   3. As definições abaixo funcionarão automaticamente.
+
+   Enquanto os arquivos não existirem, o sistema usa fallbacks
+   modernos de sistema (sem degradação visual significativa).
+*/
+
+/* ─── Sora (Títulos) ─── */
+@font-face {
+    font-family: 'Sora';
+    src: url('../fonts/sora-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ─── Inter (Corpo) ─── */
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}

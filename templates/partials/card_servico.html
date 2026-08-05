@@ -1,0 +1,37 @@
+<!-- Macro: Card de Serviço reutilizável -->
+{% macro card_servico(servico) %}
+<article class="card card--servico reveal" id="{{ servico.slug }}">
+    <div class="card__icon" style="--cor-servico: {{ servico.cor }}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            {% if servico.icone == 'code' %}
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            {% elif servico.icone == 'cpu' %}
+            <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+            {% elif servico.icone == 'monitor' %}
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            {% elif servico.icone == 'zap' %}
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            {% endif %}
+        </svg>
+    </div>
+
+    <h3 class="card__title">{{ servico.titulo }}</h3>
+    <p class="card__subtitle">{{ servico.subtitulo }}</p>
+    <p class="card__description">{{ servico.descricao }}</p>
+
+    <ul class="card__list">
+        {% for item in servico.itens %}
+        <li class="card__list-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {{ item }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn btn--outline card__cta">
+        Solicitar orçamento
+    </a>
+</article>
+{% endmacro %}

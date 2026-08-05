@@ -1,0 +1,8 @@
+# HS Tech — Robots.txt
+# Permite que todos os buscadores indexem o site
+
+User-agent: *
+Allow: /
+
+# Sitemap
+# ⚠️ Substituir pela URL do domínio oficial quando disponível

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% from "partials/card_servico.html" import card_servico %}
+
+{% block title %}Serviços | HS Tech{% endblock %}
+{% block description %}Conheça os serviços da HS Tech: desenvolvimento de sites, sistemas, automação de processos e serviços para computadores. Solicite um orçamento.{% endblock %}
+
+{% block content %}
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="container">
+        <span class="page-hero__badge reveal">Nossos Serviços</span>
+        <h1 class="page-hero__title reveal delay-1">Soluções completas em <span class="text-gradient">tecnologia</span></h1>
+        <p class="page-hero__description reveal delay-2">
+            Sites, sistemas, automações e serviços para computadores.
+            A HS Tech cuida de tudo com qualidade e compromisso.
+        </p>
+    </div>
+</section>
+
+<!-- ═══ SERVIÇOS ═══ -->
+{% for servico in servicos %}
+<section class="servico-secao {% if loop.index is even %}section--alt{% endif %}" id="{{ servico.slug }}">
+    <div class="container">
+        <div class="servico-secao__header reveal">
+            <span class="section__badge">Área {{ loop.index }}</span>
+            <h2>{{ servico.titulo }}</h2>
+            <p>{{ servico.subtitulo }}</p>
+        </div>
+
+        <div class="grid grid--4">
+            {{ card_servico(servico) }}
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+<!-- ═══ CTA FINAL ═══ -->
+{% set cta_titulo = 'Não encontrou o que precisa?' %}
+{% set cta_descricao = 'Fale com a HS Tech e descubra como podemos criar uma solução personalizada para o seu caso.' %}
+{% include "partials/cta.html" %}
+
+{% endblock %}

@@ -1,0 +1,79 @@
+/* ══════════════════════════════════════════════
+   HS TECH — DESIGN TOKENS (VARIÁVEIS GLOBAIS)
+   ══════════════════════════════════════════════ */
+
+:root {
+    /* ─── Cores de Fundo ─── */
+    --bg-preto-profundo: #050507;
+    --bg-preto-suave: #0A0A0F;
+    --bg-card: #111116;
+    --bg-card-hover: #16161D;
+
+    /* ─── Cores da Marca ─── */
+    --azul-principal: #0A84FF;
+    --azul-neon: #38B6FF;
+    --azul-claro: #6DC5FF;
+    --azul-escuro: #0066CC;
+
+    /* ─── Textos ─── */
+    --branco: #FFFFFF;
+    --texto-corpo: #B0B8C4;
+    --texto-suave: #7A8494;
+
+    /* ─── Bordas e Glassmorphism ─── */
+    --borda-glass: rgba(10, 132, 255, 0.15);
+    --borda-glass-hover: rgba(10, 132, 255, 0.35);
+    --bg-glass: rgba(255, 255, 255, 0.03);
+    --bg-glass-hover: rgba(10, 132, 255, 0.06);
+
+    /* ─── Glow / Sombras ─── */
+    --glow-primario: rgba(10, 132, 255, 0.25);
+    --glow-neon: rgba(56, 182, 255, 0.35);
+    --sombra-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --sombra-card-hover: 0 12px 48px rgba(10, 132, 255, 0.15);
+
+    /* ─── Feedback ─── */
+    --verde-sucesso: #00C853;
+    --vermelho-erro: #FF453A;
+    --amarelo-alerta: #FFD60A;
+
+    /* ─── Tipografia ─── */
+    --fonte-titulo: 'Sora', sans-serif;
+    --fonte-corpo: 'Inter', sans-serif;
+    --tamanho-hero: clamp(2.2rem, 5vw, 3.5rem);
+    --tamanho-titulo: clamp(1.6rem, 3vw, 2.2rem);
+    --tamanho-subtitulo: clamp(1.1rem, 2vw, 1.4rem);
+    --tamanho-corpo: 1rem;
+    --tamanho-pequeno: 0.875rem;
+
+    /* ─── Espaçamentos (escala 4px) ─── */
+    --espaco-1: 4px;
+    --espaco-2: 8px;
+    --espaco-3: 12px;
+    --espaco-4: 16px;
+    --espaco-5: 24px;
+    --espaco-6: 32px;
+    --espaco-7: 48px;
+    --espaco-8: 64px;
+    --espaco-9: 96px;
+    --espaco-10: 128px;
+
+    /* ─── Layout ─── */
+    --container-max: 1200px;
+    --container-padding: 24px;
+    --raio-card: 12px;
+    --raio-botao: 50px;
+    --raio-input: 10px;
+    --raio-badge: 50px;
+
+    /* ─── Transições ─── */
+    --transicao-rapida: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-media: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-lenta: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ─── Z-index ─── */
+    --z-navbar: 1000;
+    --z-whatsapp: 900;
+    --z-modal: 1100;
+    --z-tooltip: 1200;
+}

@@ -1,0 +1,62 @@
+# ══════════════════════════════
+# Python
+# ══════════════════════════════
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+venv/
+.venv/
+env/
+
+# ══════════════════════════════
+# Variáveis de ambiente
+# ══════════════════════════════
+.env
+.env.local
+
+# ══════════════════════════════
+# Banco de dados (futuro)
+# ══════════════════════════════
+instance/
+database/*.db
+database/backup/
+uploads/
+
+# ══════════════════════════════
+# Deploy / Build
+# ══════════════════════════════
+*.sqlite3
+*.db
+.scss
+.sass-cache/
+env/
+venv/
+venv3/
+.hide/
+.fn/
+.venv/
+
+# ══════════════════════════════
+# IDE / Editores
+# ══════════════════════════════
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ══════════════════════════════
+# Logs e arquivos temporários
+# ══════════════════════════════
+*.log
+*.tmp
+*.temp
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% from "partials/card_projeto.html" import card_projeto %}
+
+{% block title %}Projetos | HS Tech{% endblock %}
+{% block description %}Conheça o portfólio da HS Tech: sites, sistemas, automações e projetos de tecnologia entregues com qualidade.{% endblock %}
+
+{% block content %}
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="container">
+        <span class="page-hero__badge reveal">Portfólio</span>
+        <h1 class="page-hero__title reveal delay-1">Nossos <span class="text-gradient">projetos</span></h1>
+        <p class="page-hero__description reveal delay-2">
+            Trabalhos que entregamos com dedicação, tecnologia e resultado.
+            Seu projeto pode ser o próximo.
+        </p>
+    </div>
+</section>
+
+<!-- ═══ FILTROS ═══ -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+
+        <div class="filtros reveal" role="tablist" aria-label="Filtrar projetos por categoria">
+            {% for categoria in categorias %}
+            <button class="filtro {% if loop.first %}filtro--ativo{% endif %}"
+                    data-filtro="{{ categoria }}"
+                    role="tab"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+                {{ categoria }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <div class="grid grid--3" id="projetosGrid">
+            {% for projeto in projetos %}
+                {{ card_projeto(projeto) }}
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+{% set cta_titulo = 'Quer um projeto como esses?' %}
+{% set cta_descricao = 'Conte sua ideia para a HS Tech e receba uma proposta personalizada em tempo recorde.' %}
+{% include "partials/cta.html" %}
+
+{% endblock %}

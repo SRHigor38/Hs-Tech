@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Erro interno | HS Tech{% endblock %}
+{% block description %}Ocorreu um erro inesperado. Tente novamente em instantes.{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container error-page__inner">
+        <div class="error-page__code">500</div>
+        <h1 class="error-page__title">Ops! Algo deu errado</h1>
+        <p class="error-page__description">
+            Ocorreu um erro inesperado no servidor.
+            Tente novamente em instantes ou fale com a nossa equipe.
+        </p>
+        <div class="error-page__actions">
+            <a href="{{ url_for('main.home') }}" class="btn btn--primary">Voltar para a Home</a>
+            <a href="{{ url_for('main.contato') }}" class="btn btn--outline">Falar com a equipe</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

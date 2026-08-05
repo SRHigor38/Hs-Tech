@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>{% block title %}HS Tech | Tecnologia para seu negócio{% endblock %}</title>
+    <meta name="description" content="{% block description %}HS Tech — Desenvolvimento de sites, sistemas, automações e serviços para computadores. Tecnologia premium para seu negócio.{% endblock %}">
+    <meta name="keywords" content="HS Tech, desenvolvimento de sites, sistemas, automações, manutenção de computadores, formatação, upgrade, suporte técnico">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HS Tech">
+    <meta property="og:title" content="{% block og_title %}HS Tech | Tecnologia para seu negócio{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Desenvolvimento de sites, sistemas, automações e serviços para computadores.{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', filename='img/og/og-default.svg') }}">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}HS Tech | Tecnologia para seu negócio{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Desenvolvimento de sites, sistemas, automações e serviços para computadores.{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icons/favicon.svg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ empresa.nome }}",
+        "description": "Desenvolvimento de sites, sistemas, automações e serviços para computadores.",
+        "email": "{{ empresa.email }}",
+        "telephone": "+{{ empresa.whatsapp }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Montes Claros",
+            "addressRegion": "MG",
+            "addressCountry": "BR"
+        },
+        "sameAs": [
+            "{{ empresa.instagram }}"
+        ]
+    }
+    </script>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body data-whatsapp="{{ empresa.whatsapp }}">
+
+    {% include "partials/navbar.html" %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "partials/footer.html" %}
+    {% include "partials/whatsapp_float.html" %}
+
+    <!-- JavaScript -->
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+/* ══════════════════════════════════════════════
+   HS TECH — BASE (RESET + TIPOGRAFIA + FUNDO)
+   ══════════════════════════════════════════════ */
+
+/* ─── Reset Moderno ─── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    font-size: var(--tamanho-corpo);
+    line-height: 1.6;
+    color: var(--texto-corpo);
+    background-color: var(--bg-preto-profundo);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(10, 132, 255, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(56, 182, 255, 0.04), transparent);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Tipografia ─── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulo);
+    color: var(--branco);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--tamanho-hero); }
+h2 { font-size: var(--tamanho-titulo); }
+h3 { font-size: var(--tamanho-subtitulo); }
+
+p {
+    margin-bottom: var(--espaco-4);
+}
+
+a {
+    color: var(--azul-principal);
+    text-decoration: none;
+    transition: color var(--transicao-rapida);
+}
+
+a:hover {
+    color: var(--azul-neon);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* ─── Seleção de texto ─── */
+::selection {
+    background: var(--azul-principal);
+    color: var(--branco);
+}
+
+/* ─── Scrollbar personalizada ─── */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-preto-suave);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--azul-principal), var(--azul-escuro));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--azul-neon);
+}
+
+/* ─── Foco visível (acessibilidade) ─── */
+:focus-visible {
+    outline: 2px solid var(--azul-neon);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ─── Container ─── */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ─── Texto com gradiente ─── */
+.text-gradient {
+    background: linear-gradient(135deg, var(--azul-principal), var(--azul-neon));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ─── Reduzir movimento (acessibilidade) ─── */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

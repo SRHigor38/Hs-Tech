@@ -1,0 +1,12 @@
+/* ══════════════════════════════════════════════
+   HS TECH — CSS PRINCIPAL (PONTO DE ENTRADA)
+   Importa todos os módulos CSS em ordem correta
+   ══════════════════════════════════════════════ */
+
+@import url('variables.css');
+@import url('fonts.css');
+@import url('base.css');
+@import url('components.css');
+@import url('layouts.css');
+@import url('animations.css');
+@import url('responsive.css');
