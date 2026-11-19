@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ projeto.nome }} | {{ empresa.nome }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static',filename='css/projeto-barbearia.css') }}">{% endblock %}
+{% block content %}<div class="barbearia-case"><div class="case-wrap">
+<a class="case-back" href="{{ url_for('projetos.projetos') }}">← Voltar aos projetos</a>
+<section class="case-hero" aria-labelledby="case-title"><div><p class="case-label">Projeto demonstrativo · {{ projeto.nome }}</p><h1 id="case-title">{{ projeto.descricao_completa or projeto.nome }}</h1><p class="case-lead">{{ projeto.descricao_curta }}</p><a class="case-button" href="{{ url_for('main.contato') }}">Solicitar orçamento</a></div>{% if projeto.imagem_principal %}<img src="{{ url_for('static',filename=projeto.imagem_principal) }}" alt="Página inicial da demonstração de barbearia" fetchpriority="high">{% endif %}</section>
+<section class="case-problem"><span class="case-label">O desafio</span><h2>Mais clareza para organizar os horários</h2><p>{{ projeto.problema }}</p></section>
+{% if projeto.galeria %}<section class="case-gallery" aria-labelledby="galeria-titulo"><div class="case-heading"><span class="case-label">Na prática</span><h2 id="galeria-titulo">Como funciona</h2><p>Veja o caminho do cliente até o acompanhamento pelo responsável. As telas usam dados fictícios.</p></div>
+{% for imagem in projeto.galeria %}{% set guia = legendas.get(imagem.caminho) %}<article class="case-step{% if loop.index is even %} case-step-reverse{% endif %}"><div class="case-step-text"><span class="case-number">{{ '%02d'|format(loop.index) }}</span><h3>{{ guia[0] if guia else 'Mais uma tela do projeto' }}</h3><p>{{ guia[1] if guia else 'Conheça mais uma parte da demonstração.' }}</p><a href="{{ url_for('static',filename=imagem.caminho) }}" target="_blank" rel="noopener" aria-label="Ampliar imagem {{ loop.index }} de {{ projeto.nome }}">Ampliar imagem ↗</a></div><a class="case-image" href="{{ url_for('static',filename=imagem.caminho) }}" target="_blank" rel="noopener" aria-label="Abrir imagem {{ loop.index }} em tamanho maior"><img src="{{ url_for('static',filename=imagem.caminho) }}" alt="{{ guia[0] if guia else 'Tela da demonstração' }}" loading="lazy"></a></article>{% endfor %}</section>{% endif %}
+<section class="case-admin" aria-labelledby="painel-titulo">
+  <div class="case-heading"><span class="case-label">Painel administrativo</span><h2 id="painel-titulo">Muito mais que agendamentos</h2><p>Além de facilitar os horários dos clientes, o sistema oferece ferramentas para organizar a administração da sua barbearia.</p></div>
+  {% set cards = [
+    ('Visão geral', 'Dashboard com indicadores para acompanhar a rotina da barbearia.', 'M3 13h7V3H3v10zm11 8h7V11h-7v10zM3 21h7v-4H3v4zm11-14h7V3h-7v4z'),
+    ('Agendamentos', 'Consulte e organize os horários registrados.', 'M4 6h16v15H4z M8 3v6 M16 3v6 M4 10h16 M8 14h3 M13 14h3 M8 17h3'),
+    ('Serviços', 'Organize os serviços oferecidos pela barbearia.', 'M4 5h16v14H4z M8 9h8 M8 13h8 M8 17h5'),
+    ('Profissionais', 'Cadastre e organize os profissionais da barbearia.', 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M5 20c0-4 3-6 7-6s7 2 7 6'),
+    ('Planos', 'Acompanhe e gerencie os planos disponíveis.', 'M5 4h14v16H5z M8 8h8 M8 12h8 M8 16h5'),
+    ('Controle financeiro', 'Consulte as informações financeiras registradas.', 'M3 6h18v13H3z M3 10h18 M7 15h4 M16 15h1'),
+    ('Despesas e gastos', 'Acompanhe as despesas da barbearia.', 'M6 3h12v18l-3-2-3 2-3-2-3 2z M9 8h6 M9 12h6 M9 16h4'),
+    ('Configurações', 'Acesse as opções de configuração do sistema.', 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z M12 2v3 M12 19v3 M2 12h3 M19 12h3 M5 5l2 2 M17 17l2 2 M19 5l-2 2 M7 17l-2 2')
+  ] %}
+  <div class="case-admin-grid">{% for titulo, descricao, icone in cards %}<article class="case-admin-card"><span class="case-admin-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ icone }}"/></svg></span><h3>{{ titulo }}</h3><p>{{ descricao }}</p></article>{% endfor %}</div>
+</section>
+{% if projeto.beneficios %}<section class="case-benefits"><span class="case-label">Benefícios práticos</span><h2>Uma experiência mais organizada</h2><div class="case-benefit-grid">{% for item in projeto.beneficios.splitlines() if item.strip() %}<article><span aria-hidden="true">✦</span><p>{{ item }}</p></article>{% endfor %}</div></section>{% endif %}
+<section class="case-cta"><h2>Quer uma solução assim para o seu negócio?</h2><p>Desenvolvo sistemas personalizados para ajudar você a organizar agendamentos e oferecer mais praticidade aos seus clientes.</p><a class="case-button" href="{{ url_for('main.contato') }}">Solicitar orçamento</a></section>
+</div></div>{% endblock %}

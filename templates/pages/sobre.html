@@ -1,118 +1,43 @@
 {% extends "base.html" %}
-
-{% block title %}Sobre | HS Tech{% endblock %}
-{% block description %}Conheça a HS Tech: nossa história, missão, visão e valores. Uma empresa de tecnologia comprometida com resultados reais.{% endblock %}
-
+{% block title %}Sobre | {{ empresa.nome }}{% endblock %}
+{% block description %}Conheça a {{ empresa.nome }}, uma marca independente de desenvolvimento de soluções digitais sob medida.{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/sobre.css') }}">{% endblock %}
 {% block content %}
-
-<!-- ═══ PAGE HERO ═══ -->
-<section class="page-hero">
-    <div class="hero__grid-bg" aria-hidden="true"></div>
-    <div class="container">
-        <span class="page-hero__badge reveal">Sobre Nós</span>
-        <h1 class="page-hero__title reveal delay-1">Tecnologia com <span class="text-gradient">propósito</span></h1>
-        <p class="page-hero__description reveal delay-2">
-            Conheça a história e os valores que movem a HS Tech.
-        </p>
+<div class="about-page">
+  <section class="about-hero">
+    <div class="container about-hero__inner">
+      <div class="about-hero__copy">
+        <span class="about-kicker"><span aria-hidden="true"></span> SOBRE A {{ empresa.nome }}</span>
+        <h1>Tecnologia que transforma <em>ideias em soluções.</em></h1>
+        <p>{{ empresa.sobre_intro or empresa.descricao }}</p>
+        <a class="about-hero__anchor" href="#sobre-marca">Conheça a {{ empresa.nome }} <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="about-visual" aria-hidden="true">
+        <div class="about-visual__grid"></div>
+        <div class="about-visual__frame"><div class="about-visual__top"><i></i><i></i><i></i><span>{{ empresa.nome }} / DIGITAL</span></div><div class="about-visual__body"><div class="about-visual__code">&lt;/&gt;</div><div class="about-visual__lines"><b></b><b></b><b></b></div><div class="about-visual__status"><span></span> IDEIAS EM MOVIMENTO</div></div></div>
+        <span class="about-visual__node about-visual__node--one"></span><span class="about-visual__node about-visual__node--two"></span>
+      </div>
     </div>
-</section>
-
-<!-- ═══ HISTÓRIA ═══ -->
-<section class="section">
-    <div class="container">
-        <div class="sobre__historia reveal">
-            <span class="section__badge">Nossa História</span>
-            <h2 class="section__title">Quem somos</h2>
-            <p>
-                A <strong>HS Tech</strong> nasceu da paixão por tecnologia e do desejo
-                de transformar a vida de pessoas e empresas através de soluções digitais.
-                Localizada em <strong>Montes Claros - MG</strong>, atuamos em quatro frentes
-                principais: desenvolvimento de sites, desenvolvimento de sistemas,
-                automação de processos e serviços completos para computadores.
-            </p>
-            <p>
-                Acreditamos que tecnologia de qualidade não é privilégio de grandes
-                empresas. Por isso, oferecemos soluções acessíveis, personalizadas
-                e com atendimento humano, do primeiro contato à entrega final.
-            </p>
-        </div>
+  </section>
+  <section class="about-story" id="sobre-marca"><div class="container about-story__inner">
+    <div><span class="about-label">A MARCA</span><h2>Por trás de cada projeto,<br><span>uma conversa.</span></h2></div>
+    <div class="about-story__text"><p>A {{ empresa.nome }} é uma marca independente de desenvolvimento de software, conduzida por um único desenvolvedor e dedicada a criar soluções digitais úteis para cada negócio.</p><p>O trabalho começa pela escuta: entender suas necessidades, seus processos e seus objetivos para desenvolver, com programação, sites, sistemas e automações personalizados. O atendimento é direto com quem desenvolve, do planejamento à entrega.</p><div class="about-story__tags"><span>DESENVOLVIMENTO INDEPENDENTE</span><span>ATENDIMENTO DIRETO</span><span>SOLUÇÕES SOB MEDIDA</span></div></div>
+  </div></section>
+  <section class="about-values"><div class="container">
+    <div class="about-section-heading"><div><span class="about-label">O QUE ME ORIENTA</span><h2>Propósito em cada linha.</h2></div><p>Princípios que guiam a criação de soluções digitais para pessoas e negócios.</p></div>
+    <div class="about-values__grid">
+      <article class="about-card"><div class="about-card__top"><div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div><span>01</span></div><h3>Missão</h3><p>Desenvolver soluções digitais que ajudem negócios a organizar processos, fortalecer sua presença online e evoluir.</p></article>
+      <article class="about-card"><div class="about-card__top"><div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div><span>02</span></div><h3>Visão</h3><p>Construir uma marca reconhecida pela qualidade técnica, confiança e capacidade de transformar ideias em soluções úteis.</p></article>
+      <article class="about-card"><div class="about-card__top"><div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.7-3 7.8-7 10-4-2.2-7-5.3-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></div><span>03</span></div><h3>Valores</h3><p>Transparência, aprendizado contínuo, responsabilidade, qualidade e compromisso com cada projeto.</p></article>
     </div>
-</section>
-
-<!-- ═══ MISSÃO, VISÃO E VALORES ═══ -->
-<section class="section section--alt">
-    <div class="container">
-        <div class="section__header reveal">
-            <span class="section__badge">Nossos Pilares</span>
-            <h2 class="section__title">Missão, Visão e Valores</h2>
-        </div>
-
-        <div class="grid grid--3">
-            {% for mvv in mvvs %}
-            <div class="card reveal">
-                <div class="card__icon" style="--cor-servico: var(--azul-principal)">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        {% if mvv.icone == 'target' %}
-                        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-                        {% elif mvv.icone == 'eye' %}
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                        {% elif mvv.icone == 'heart' %}
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        {% endif %}
-                    </svg>
-                </div>
-                <h3 class="card__title">{{ mvv.titulo }}</h3>
-                <p class="card__description">{{ mvv.descricao }}</p>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- ═══ DIFERENCIAIS ═══ -->
-<section class="section">
-    <div class="container">
-        <div class="section__header reveal">
-            <span class="section__badge">Por que escolher a HS Tech?</span>
-            <h2 class="section__title">Nossos compromissos</h2>
-        </div>
-
-        <div class="grid grid--2">
-            <div class="card reveal">
-                <h3 class="card__title">🎯 Foco no resultado</h3>
-                <p class="card__description">
-                    Cada projeto é pensado para gerar valor real para o seu negócio.
-                    Não entregamos apenas código — entregamos soluções que funcionam.
-                </p>
-            </div>
-            <div class="card reveal">
-                <h3 class="card__title">🤝 Atendimento próximo</h3>
-                <p class="card__description">
-                    Você fala diretamente com quem desenvolve. Sem intermediários,
-                    sem burocracia. Comunicação clara do início ao fim.
-                </p>
-            </div>
-            <div class="card reveal">
-                <h3 class="card__title">⚡ Agilidade</h3>
-                <p class="card__description">
-                    Prazos realistas e cumpridos. Sabemos que o tempo é o ativo
-                    mais valioso do seu negócio.
-                </p>
-            </div>
-            <div class="card reveal">
-                <h3 class="card__title">🛡️ Suporte contínuo</h3>
-                <p class="card__description">
-                    Após a entrega, continuamos ao seu lado. Suporte técnico
-                    e manutenção para garantir que tudo funcione perfeitamente.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ CTA FINAL ═══ -->
-{% set cta_titulo = 'Vamos trabalhar juntos?' %}
-{% set cta_descricao = 'Conte sua ideia para a HS Tech e descubra como podemos transformá-la em realidade.' %}
-{% include "partials/cta.html" %}
-
+  </div></section>
+  <section class="about-difference"><div class="container about-difference__inner"><div class="about-difference__intro"><span class="about-label">O JEITO {{ empresa.nome }}</span><h2>Tecnologia pensada <span>para a sua realidade.</span></h2><p>Um processo próximo e transparente para tirar ideias do papel e construir soluções adequadas ao seu negócio.</p></div>
+    <div class="about-difference__grid">
+      <article class="about-feature"><span class="about-feature__number">01</span><div><h3>Atendimento direto e personalizado</h3><p>Você conversa diretamente com quem desenvolve a solução.</p></div></article>
+      <article class="about-feature"><span class="about-feature__number">02</span><div><h3>Desenvolvimento sob medida</h3><p>As escolhas do projeto partem das necessidades e objetivos do seu negócio.</p></div></article>
+      <article class="about-feature"><span class="about-feature__number">03</span><div><h3>Comunicação clara durante o projeto</h3><p>Alinhamento sobre etapas, decisões e expectativas ao longo do trabalho.</p></div></article>
+      <article class="about-feature"><span class="about-feature__number">04</span><div><h3>Evolução de sites e sistemas</h3><p>Melhorias e novas funcionalidades conforme as necessidades do projeto.</p></div></article>
+    </div></div></section>
+  <section class="about-final"><div class="container"><div class="about-final__card"><div><span class="about-label">VAMOS COMEÇAR?</span><h2>Vamos transformar sua ideia em realidade?</h2><p>Conte sobre seu projeto e descubra como uma solução digital pode ajudar seu negócio.</p></div><a href="{{ url_for('main.contato') }}" class="about-button">Solicitar orçamento <span aria-hidden="true">↗</span></a></div></div></section>
+</div>
 {% endblock %}

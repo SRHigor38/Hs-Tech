@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Setup Inicial | HS Tech{% endblock %}
+{% block description %}Configuração inicial do administrador - HS Tech{% endblock %}
+
+{% block content %}
+
+<!-- ═══ SETUP INICIAL ═══ -->
+<section class="section" style="min-height: 80vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card card--login p-4">
+                    <div class="text-center mb-3">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="8" y1="12" x2="21" y2="12"/>
+                            <path d="M16 7a4 4 0 0 1 0 8"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-center mb-4">Configuração Inicial</h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Crie o primeiro administrador para acessar o painel.
+                    </p>
+
+                    <form method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            {{ form.username.label(class="form-label") }}
+                            {{ form.username(class="form-input") }}
+                            {{ form.username.errors(class="form-error") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-input") }}
+                            {{ form.password.errors(class="form-error") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.confirm.label(class="form-label") }}
+                            {{ form.confirm(class="form-input") }}
+                            {{ form.confirm.errors(class="form-error") }}
+                        </div>
+
+                        <button type="submit" class="btn btn--neon w-100">
+                            <span class="btn__text">Criar Admin e Login</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

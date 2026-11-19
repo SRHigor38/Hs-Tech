@@ -1,0 +1,4 @@
+# Somente testes locais opcionais.
+fakeredis[lua]==2.40.0
+waitress==3.0.2
+PyYAML==6.0.3

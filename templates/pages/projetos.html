@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 
-{% from "partials/card_projeto.html" import card_projeto %}
-
-{% block title %}Projetos | HS Tech{% endblock %}
-{% block description %}Conheça o portfólio da HS Tech: sites, sistemas, automações e projetos de tecnologia entregues com qualidade.{% endblock %}
+{% from "partials/card_projeto.html" import card_projeto with context %}
+{% block title %}Projetos | {{ empresa.nome }}{% endblock %}
+{% block description %}Conheça o portfólio da {{ empresa.nome }}: projetos próprios e demonstrações de soluções digitais.{% endblock %}
 
 {% block content %}
 
@@ -14,7 +13,7 @@
         <span class="page-hero__badge reveal">Portfólio</span>
         <h1 class="page-hero__title reveal delay-1">Nossos <span class="text-gradient">projetos</span></h1>
         <p class="page-hero__description reveal delay-2">
-            Trabalhos que entregamos com dedicação, tecnologia e resultado.
+            Projetos próprios e demonstrações que apresentam possibilidades para negócios.
             Seu projeto pode ser o próximo.
         </p>
     </div>
@@ -24,29 +23,28 @@
 <section class="section" style="padding-top: 0;">
     <div class="container">
 
-        <div class="filtros reveal" role="tablist" aria-label="Filtrar projetos por categoria">
+        <nav class="filtros" aria-label="Filtrar projetos por categoria">
+            <a href="{{ url_for('projetos.projetos') }}">Todos</a>
             {% for categoria in categorias %}
-            <button class="filtro {% if loop.first %}filtro--ativo{% endif %}"
-                    data-filtro="{{ categoria }}"
-                    role="tab"
-                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
-                {{ categoria }}
-            </button>
+            <a href="{{ url_for('projetos.projetos', categoria=categoria) }}" {% if categoria == categoria_filtro %}aria-current="page"{% endif %}>{{ categoria }}</a>
             {% endfor %}
-        </div>
+        </nav>
 
         <div class="grid grid--3" id="projetosGrid">
             {% for projeto in projetos %}
                 {{ card_projeto(projeto) }}
+            {% else %}
+                <p>Projetos e demonstrações serão publicados em breve. Volte para conhecer as novidades.</p>
             {% endfor %}
         </div>
+        {% if projetos.pages > 1 %}<nav aria-label="Páginas de projetos">{% if projetos.has_prev %}<a href="{{ url_for('projetos.projetos', pagina=projetos.prev_num, categoria=categoria_filtro) }}">Anterior</a>{% endif %} Página {{ projetos.page }} de {{ projetos.pages }} {% if projetos.has_next %}<a href="{{ url_for('projetos.projetos', pagina=projetos.next_num, categoria=categoria_filtro) }}">Próxima</a>{% endif %}</nav>{% endif %}
 
     </div>
 </section>
 
 <!-- ═══ CTA FINAL ═══ -->
 {% set cta_titulo = 'Quer um projeto como esses?' %}
-{% set cta_descricao = 'Conte sua ideia para a HS Tech e receba uma proposta personalizada em tempo recorde.' %}
+{% set cta_descricao = 'Conte sua ideia para ' ~ empresa.nome ~ ' e solicite uma proposta personalizada.' %}
 {% include "partials/cta.html" %}
 
 {% endblock %}

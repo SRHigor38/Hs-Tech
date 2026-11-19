@@ -4,8 +4,8 @@
     <div class="container navbar__inner">
 
         <!-- Logo -->
-        <a href="{{ url_for('main.home') }}" class="navbar__logo" aria-label="HS Tech — Página inicial">
-            <svg class="navbar__logo-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <a href="{{ url_for('main.home') }}" class="navbar__logo" aria-label="{{ empresa.nome }} — Página inicial">
+            {% if empresa.logo %}<img class="navbar__logo-icon" src="{{ url_for('static', filename=empresa.logo) }}" alt="" width="36" height="36">{% else %}<svg class="navbar__logo-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <rect x="2" y="2" width="32" height="32" rx="8" fill="url(#logoGradiente)"/>
                 <text x="18" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">HS</text>
                 <defs>
@@ -14,8 +14,8 @@
                         <stop offset="1" stop-color="#38B6FF"/>
                     </linearGradient>
                 </defs>
-            </svg>
-            <span class="navbar__logo-text">HS <span class="text-gradient">TECH</span></span>
+            </svg>{% endif %}
+            <span class="navbar__logo-text">{{ empresa.nome }}</span>
         </a>
 
         <!-- Links -->
@@ -23,10 +23,6 @@
             <a href="{{ url_for('main.home') }}"
                class="navbar__link {% if active_page == 'main.home' %}navbar__link--active{% endif %}">
                 Home
-            </a>
-            <a href="{{ url_for('servicos.servicos') }}"
-               class="navbar__link {% if active_page == 'servicos.servicos' %}navbar__link--active{% endif %}">
-                Serviços
             </a>
             <a href="{{ url_for('projetos.projetos') }}"
                class="navbar__link {% if active_page == 'projetos.projetos' %}navbar__link--active{% endif %}">
@@ -36,12 +32,11 @@
                class="navbar__link {% if active_page == 'main.sobre' %}navbar__link--active{% endif %}">
                 Sobre
             </a>
-            <a href="{{ url_for('main.contato') }}"
-               class="navbar__link {% if active_page == 'main.contato' %}navbar__link--active{% endif %}">
+            <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="navbar__link">
                 Contato
             </a>
 
-            <a href="{{ whatsapp_url or empresa.whatsapp }}" target="_blank" rel="noopener" class="btn btn--primary navbar__cta">
+            <a href="{{ url_for('main.contato') }}" class="btn btn--primary navbar__cta">
                 Orçamento
             </a>
         </nav>

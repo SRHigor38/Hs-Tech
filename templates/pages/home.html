@@ -1,137 +1,14 @@
 {% extends "base.html" %}
-
-{% from "partials/card_servico.html" import card_servico %}
-{% from "partials/card_projeto.html" import card_projeto %}
-
-{% block title %}HS Tech | Sites, Sistemas e Suporte Técnico{% endblock %}
-{% block description %}HS Tech — Desenvolvimento de sites, sistemas, automações e serviços completos para computadores. Tecnologia premium para transformar seu negócio.{% endblock %}
-
+{% block title %}{{ empresa.nome }} | Soluções digitais para seu negócio{% endblock %}
+{% block description %}Sites, sistemas, lojas virtuais e automações sob medida para o seu negócio.{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/home-nova.css') }}">{% endblock %}
 {% block content %}
-
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-    <div class="hero__grid-bg" aria-hidden="true"></div>
-    <div class="hero__glow" aria-hidden="true"></div>
-
-    <div class="container hero__inner">
-        <div class="hero__content">
-            <span class="hero__badge reveal">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
-                Tecnologia que transforma negócios
-            </span>
-
-            <h1 class="hero__title reveal delay-1">
-                Soluções digitais <span class="text-gradient">completas</span> para sua empresa
-            </h1>
-
-            <p class="hero__description reveal delay-2">
-                Desenvolvemos sites, sistemas e automações sob medida.
-                Também cuidamos do seu computador com serviços completos
-                de manutenção e suporte técnico.
-            </p>
-
-            <div class="hero__actions reveal delay-3">
-                <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn btn--neon">
-                    Solicitar Orçamento
-                </a>
-                <a href="{{ url_for('servicos.servicos') }}" class="btn btn--outline">
-                    Ver Serviços
-                </a>
-            </div>
-        </div>
-
-        <div class="hero__visual reveal delay-2">
-            <div class="hero__visual-card">
-                <svg class="hero__visual-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ SERVIÇOS EM DESTAQUE ═══ -->
-<section class="section">
-    <div class="container">
-        <div class="section__header reveal">
-            <span class="section__badge">Nossos Serviços</span>
-            <h2 class="section__title">O que fazemos</h2>
-            <p class="section__description">
-                Soluções completas em tecnologia para impulsionar seu negócio.
-            </p>
-        </div>
-
-        <div class="grid grid--3">
-            {% for servico in servicos_destaque %}
-                {{ card_servico(servico) }}
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- ═══ DIFERENCIAIS ═══ -->
-<section class="section section--alt">
-    <div class="container">
-        <div class="section__header reveal">
-            <span class="section__badge">Por que a HS Tech?</span>
-            <h2 class="section__title">Nossos diferenciais</h2>
-            <p class="section__description">
-                Compromisso com qualidade, prazo e resultado em cada projeto.
-            </p>
-        </div>
-
-        <div class="grid grid--4">
-            {% for diferencial in diferenciais %}
-            <div class="card diferencial reveal">
-                <div class="diferencial__icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        {% if diferencial.icone == 'chat' %}
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        {% elif diferencial.icone == 'clock' %}
-                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                        {% elif diferencial.icone == 'shield' %}
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        {% elif diferencial.icone == 'rocket' %}
-                        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-                        {% endif %}
-                    </svg>
-                </div>
-                <h3 class="diferencial__title">{{ diferencial.titulo }}</h3>
-                <p class="diferencial__description">{{ diferencial.descricao }}</p>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- ═══ PROJETOS RECENTES ═══ -->
-<section class="section section--alt">
-    <div class="container">
-        <div class="section__header reveal">
-            <span class="section__badge">Portfólio</span>
-            <h2 class="section__title">Projetos recentes</h2>
-            <p class="section__description">
-                Alguns dos trabalhos que já entregamos com muito orgulho.
-            </p>
-        </div>
-
-        <div class="grid grid--3">
-            {% for projeto in projetos_destaque %}
-                {{ card_projeto(projeto) }}
-            {% endfor %}
-        </div>
-
-        <div class="section__header" style="margin-top: var(--espaco-7); margin-bottom: 0;">
-            <a href="{{ url_for('projetos.projetos') }}" class="btn btn--outline">Ver todos os projetos</a>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ CTA FINAL ═══ -->
-{% set cta_titulo = 'Pronto para transformar sua ideia em realidade?' %}
-{% set cta_descricao = 'Fale com a HS Tech e descubra como podemos impulsionar seu negócio com tecnologia de ponta.' %}
-{% include "partials/cta.html" %}
-
+<div class="home-page">
+<section class="home-hero"><div class="container home-hero__layout"><div><span class="home-kicker"><i></i> DESENVOLVIMENTO DIGITAL SOB MEDIDA</span><h1>Ideias que ganham <em>vida digital.</em></h1><p>Sites, sistemas e automações criados para atender às necessidades do seu negócio.</p><a class="home-button" href="{{ url_for('main.contato') }}">Solicitar orçamento <span aria-hidden="true">↗</span></a><a class="home-text-link" href="#servicos">Conhecer serviços <span aria-hidden="true">↓</span></a></div><div class="home-graphic" aria-hidden="true"><div class="home-graphic__grid"></div><div class="home-graphic__window"><div class="home-graphic__bar"><i></i><i></i><i></i><span>{{ empresa.nome }} / DIGITAL</span></div><div class="home-graphic__inside"><div class="home-graphic__code">&lt;/&gt;</div><b></b><b></b><b></b><small>● &nbsp; IDEIAS EM MOVIMENTO</small></div></div></div></div></section>
+<section class="home-section" id="servicos"><div class="container"><div class="home-heading"><div><span class="home-label">O QUE POSSO CRIAR PARA VOCÊ</span><h2>Soluções para cada desafio.</h2></div><p>Da presença digital à organização de processos, escolha o caminho que faz sentido para seu negócio.</p></div><div class="home-services">{% for servico in servicos_destaque %}<article class="home-service"><div class="home-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{% if servico.icone == 'cpu' %}<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/>{% elif servico.icone == 'zap' %}<path d="M13 2 4 14h7l-1 8 10-12h-7l1-8Z"/>{% else %}<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9-3 3 3 3m4-6 3 3-3 3"/>{% endif %}</svg></div><h3>{{ servico.nome }}</h3><p>{{ servico.descricao or '' }}</p><a href="{{ url_for('main.contato') }}">Solicitar orçamento <span aria-hidden="true">↗</span></a></article>{% else %}<div class="home-empty"><h3>Novos serviços em breve</h3><p>Conte sobre seu projeto para iniciar uma conversa.</p><a href="{{ url_for('main.contato') }}">Solicitar orçamento ↗</a></div>{% endfor %}</div></div></section>
+<section class="home-section home-section--alt"><div class="container"><div class="home-heading"><div><span class="home-label">PORTFÓLIO</span><h2>Ideias em construção.</h2></div><p>Projetos próprios e demonstrações de soluções digitais.</p></div><div class="home-projects">{% for projeto in projetos_destaque %}<article class="home-project"><img src="{{ url_for('static', filename=projeto.imagem_principal or 'img/projetos/projeto-sistema-gestao.svg') }}" alt="" loading="lazy"><div><span>{{ projeto.categoria or 'Projeto digital' }}</span><h3><a href="{{ url_for('projetos.detalhe', slug=projeto.slug) }}">{{ projeto.nome }}</a></h3><p>{{ projeto.descricao_curta or '' }}</p></div></article>{% else %}<div class="home-empty"><h3>Projetos em breve</h3><p>Novos projetos e demonstrações serão publicados aqui.</p></div>{% endfor %}</div><a class="home-outline" href="{{ url_for('projetos.projetos') }}">Ver projetos <span aria-hidden="true">↗</span></a></div></section>
+<section class="home-section"><div class="container"><div class="home-heading"><div><span class="home-label">POSSIBILIDADES</span><h2>Tecnologia para a sua rotina.</h2></div><p>Cada negócio tem desafios próprios. Uma solução digital pode ajudar de diferentes formas.</p></div><div class="home-usecases"><article><span>01 / SERVIÇOS</span><h3>Atendimento mais organizado</h3><p>Reúna solicitações e informações para facilitar o acompanhamento de clientes.</p></article><article><span>02 / COMÉRCIO</span><h3>Produtos em destaque</h3><p>Apresente seu catálogo online e ofereça mais praticidade na jornada de compra.</p></article><article><span>03 / AGENDAMENTOS</span><h3>Rotinas mais simples</h3><p>Organize horários e automatize etapas repetitivas de acordo com sua operação.</p></article></div></div></section>
+<section class="home-section home-section--alt"><div class="container"><div class="home-heading"><div><span class="home-label">COMO FUNCIONA</span><h2>Da ideia à entrega.</h2></div><p>Um processo claro, com contato direto em cada etapa do projeto.</p></div><div class="home-steps"><article><span>01</span><h3>Conversa inicial</h3><p>Você compartilha sua ideia, necessidades e objetivos.</p></article><article><span>02</span><h3>Planejamento</h3><p>Definimos o escopo e uma proposta para a solução.</p></article><article><span>03</span><h3>Desenvolvimento</h3><p>A solução é construída e validada conforme o combinado.</p></article><article><span>04</span><h3>Entrega</h3><p>Após os ajustes, o projeto é entregue com as orientações necessárias.</p></article></div></div></section>
+<section class="home-section home-final"><div class="container"><div class="home-final__card"><div><span class="home-label">VAMOS COMEÇAR?</span><h2>Seu próximo projeto começa aqui.</h2><p>Conte sua ideia e descubra como a tecnologia pode ajudar seu negócio.</p></div><a class="home-button" href="{{ url_for('main.contato') }}">Solicitar orçamento <span aria-hidden="true">↗</span></a></div></div></section>
+</div>
 {% endblock %}

@@ -1,6 +1,6 @@
 <!-- CTA reutilizável -->
 {% set cta_titulo = cta_titulo or 'Pronto para começar seu projeto?' %}
-{% set cta_descricao = cta_descricao or 'Fale com a HS Tech e descubra como podemos transformar sua ideia em realidade com tecnologia de ponta.' %}
+{% set cta_descricao = cta_descricao or 'Conte sua ideia para ' ~ empresa.nome ~ ' e conheça possibilidades para o seu projeto.' %}
 
 <section class="cta reveal">
     <div class="container cta__inner">
@@ -9,11 +9,8 @@
             <p class="cta__description">{{ cta_descricao }}</p>
         </div>
         <div class="cta__actions">
-            <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn btn--neon">
+            <a href="{{ url_for('main.contato') }}" class="btn btn--neon">
                 Solicitar Orçamento
-            </a>
-            <a href="{{ url_for('main.contato') }}" class="btn btn--outline">
-                Falar com a equipe
             </a>
         </div>
     </div>

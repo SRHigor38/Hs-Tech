@@ -21,7 +21,7 @@ def empresa_config() -> dict:
     Esses dados ficam disponíveis em todos os templates
     através do context processor.
     """
-    return {
+    dados = {
         "nome": config("EMPRESA_NOME", default="HS Tech"),
         "whatsapp": config("EMPRESA_WHATSAPP", default="5538991388394"),
         "telefone": config("EMPRESA_TELEFONE", default="(38) 99138-8394"),
@@ -31,7 +31,19 @@ def empresa_config() -> dict:
         "instagram": config("EMPRESA_INSTAGRAM", default="https://www.instagram.com/hs.tech.38"),
         "linkedin": config("EMPRESA_LINKEDIN", default=""),
         "github": config("EMPRESA_GITHUB", default=""),
+        "descricao": "Sites, sistemas, lojas virtuais e automações para o seu negócio.",
+        "sobre_intro": "",
+        "logo": "", "favicon": "",
     }
+    from core.models import EmpresaConfig
+    for item in EmpresaConfig.query.all():
+        if item.chave in dados and item.valor is not None:
+            dados[item.chave] = item.valor
+    if not dados.get('sobre_intro'):
+        dados['sobre_intro'] = f"{dados['nome']} desenvolve sites, sistemas e automações para ajudar negócios a evoluir no mundo digital."
+    if dados.get('whatsapp'):
+        dados['telefone'] = '+' + dados['whatsapp']
+    return dados
 
 
 def whatsapp_link(mensagem: str = "") -> str:
@@ -46,11 +58,11 @@ def whatsapp_link(mensagem: str = "") -> str:
     Returns:
         str: URL completa do WhatsApp.
     """
-    numero = config("EMPRESA_WHATSAPP", default="5538991388394")
+    numero = empresa_config()["whatsapp"]
     base = f"https://wa.me/{numero}"
 
     if not mensagem:
-        mensagem = "Olá! Visitei o site da HS Tech e gostaria de solicitar um orçamento."
+        mensagem = f"Olá! Visitei o site da {empresa_config()['nome']} e gostaria de solicitar um orçamento."
 
     from urllib.parse import quote
 

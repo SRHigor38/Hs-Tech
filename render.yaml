@@ -1,23 +1,31 @@
-# ══════════════════════════════════════════════
-# HS Tech — Configuração de Deploy no Render
-# ══════════════════════════════════════════════
-
+# Modelo local: não cria serviços nem autoriza publicação.
 services:
   - type: web
     name: hs-tech
     runtime: python
-    plan: free
+    plan: 0.5c-512mb
+    numInstances: 1
+    autoDeployTrigger: 'off'
     buildCommand: pip install -r requirements.txt
+    preDeployCommand: python -m flask --app app db upgrade
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
     healthCheckPath: /
+    disk:
+      name: hs-tech-uploads
+      mountPath: /opt/render/project/src/static/img/projetos/uploads
+      sizeGB: 1
     envVars:
       - key: APP_ENV
         value: production
-      - key: HOST
-        value: 0.0.0.0
-      - key: PORT
-        value: 10000
       - key: SECRET_KEY
         generateValue: true
       - key: PYTHON_VERSION
         value: 3.13.3
+      - key: TRUST_RENDER_PROXY
+        value: 'true'
+      - key: TRUST_RENDER_CF_IP
+        value: 'true'
+      - key: DATABASE_URL
+        sync: false
+      - key: RATELIMIT_STORAGE_URI
+        sync: false

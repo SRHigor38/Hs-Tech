@@ -145,3 +145,4 @@ input, textarea, select {
         transition-duration: 0.01ms !important;
     }
 }
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:9999;background:#fff;color:#050507;padding:.7rem 1rem;transform:translateY(-200%)}.skip-link:focus{transform:translateY(0)}

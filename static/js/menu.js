@@ -22,6 +22,7 @@ export function initMenu() {
         toggle.setAttribute('aria-expanded', String(isOpen));
         toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
         document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (isOpen) nav.querySelector('a')?.focus();
     };
 
     // Fechar menu ao clicar em um link
@@ -44,8 +45,9 @@ export function initMenu() {
 
     // Fechar menu com tecla ESC
     const handleEscape = (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === 'Escape' && nav.classList.contains('navbar__nav--aberto')) {
             closeMenu();
+            toggle.focus();
         }
     };
 

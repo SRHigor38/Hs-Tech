@@ -1,22 +1,22 @@
 <!-- Macro: Card de Projeto reutilizável -->
 {% macro card_projeto(projeto) %}
 <article class="card card--projeto reveal" data-categoria="{{ projeto.categoria }}">
-    <div class="card__image">
-        <img src="{{ url_for('static', filename=projeto.imagem) }}"
-             alt="{{ projeto.titulo }}"
+    <a class="card__image" href="{{ url_for('projetos.detalhe', slug=projeto.slug) }}">
+        <img src="{{ url_for('static', filename=projeto.imagem_principal or 'img/projetos/projeto-sistema-gestao.svg') }}"
+             alt="{{ projeto.nome }}"
              loading="lazy"
              width="600"
              height="400">
         <div class="card__overlay">
             <span class="badge">{{ projeto.categoria }}</span>
-            <h3 class="card__title">{{ projeto.titulo }}</h3>
-            <p class="card__description">{{ projeto.descricao }}</p>
+            <h3 class="card__title">{{ projeto.nome }}</h3>
+            <p class="card__description">{{ projeto.descricao_curta }}</p>
             <div class="card__tags">
-                {% for tech in projeto.tecnologias %}
+                {% for tech in [] %}
                 <span class="card__tag">{{ tech }}</span>
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </a>
 </article>
 {% endmacro %}

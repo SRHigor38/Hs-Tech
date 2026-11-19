@@ -1,6 +1,6 @@
 <!-- Macro: Card de Serviço reutilizável -->
 {% macro card_servico(servico) %}
-<article class="card card--servico reveal" id="{{ servico.slug }}">
+<article class="card card--servico reveal">
     <div class="card__icon" style="--cor-servico: {{ servico.cor }}">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             {% if servico.icone == 'code' %}
@@ -15,12 +15,12 @@
         </svg>
     </div>
 
-    <h3 class="card__title">{{ servico.titulo }}</h3>
-    <p class="card__subtitle">{{ servico.subtitulo }}</p>
+    <h3 class="card__title">{{ servico.nome }}</h3>
+    <p class="card__subtitle"></p>
     <p class="card__description">{{ servico.descricao }}</p>
 
     <ul class="card__list">
-        {% for item in servico.itens %}
+        {% for item in (servico.beneficios or "").splitlines() %}
         <li class="card__list-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="20 6 9 17 4 12"/>
@@ -30,7 +30,7 @@
         {% endfor %}
     </ul>
 
-    <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="btn btn--outline card__cta">
+    <a href="{{ url_for('main.contato') }}" class="btn btn--outline card__cta">
         Solicitar orçamento
     </a>
 </article>

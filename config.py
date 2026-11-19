@@ -9,6 +9,16 @@ from pathlib import Path
 from decouple import config
 
 
+
+
+def normalizar_database_url(url):
+    """Usa psycopg 3 para URLs PostgreSQL comuns de provedores."""
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://"):]
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url[len("postgresql://"):]
+    return url
+
 # Caminho base do projeto (raiz)
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -32,15 +42,22 @@ class Config:
     UPLOAD_DIR = BASE_DIR / "uploads"
 
     # Banco de dados (futuro - preparado para ativação)
-    SQLALCHEMY_DATABASE_URI = config(
+    SQLALCHEMY_DATABASE_URI = normalizar_database_url(config(
         "DATABASE_URL",
         default=f"sqlite:///{INSTANCE_DIR / 'hs_tech.db'}",
-    )
+    ))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Sessão
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
+    RATELIMIT_STORAGE_URI = config("RATELIMIT_STORAGE_URI", default="memory://")
+    MAX_CONTENT_LENGTH = 5 * 1024 * 1024
+    TRUST_RENDER_PROXY = config("TRUST_RENDER_PROXY", default=False, cast=bool)
+    TRUST_RENDER_CF_IP = config("TRUST_RENDER_CF_IP", default=False, cast=bool)
+    LOG_DIRECTORY = config("HS_LOG_DIR", default="")
+    LOG_MAX_BYTES = 10 * 1024 * 1024
+    LOG_BACKUP_COUNT = 5
 
     # Ferramentas de segurança
     PREFERRED_URL_SCHEME = "http"
@@ -70,6 +87,7 @@ class DevelopmentConfig(Config):
     """Configurações do ambiente de desenvolvimento."""
 
     DEBUG = True
+    ALLOW_DEV_ADMIN = True
     SESSION_COOKIE_SECURE = False
 
 
@@ -77,17 +95,20 @@ class ProductionConfig(Config):
     """Configurações do ambiente de produção."""
 
     DEBUG = False
+    ALLOW_DEV_ADMIN = False
     SESSION_COOKIE_SECURE = True
     PREFERRED_URL_SCHEME = "https"
 
     # Em produção, exige uma SECRET_KEY forte definida via variável de ambiente
-    SECRET_KEY = config("SECRET_KEY")
+    SECRET_KEY = config("SECRET_KEY", default="")
+    RATELIMIT_STORAGE_URI = config("RATELIMIT_STORAGE_URI", default="")
 
 
 class TestingConfig(Config):
     """Configurações do ambiente de testes."""
 
     TESTING = True
+    ALLOW_DEV_ADMIN = True
     DEBUG = True
     SESSION_COOKIE_SECURE = False
 
@@ -103,4 +124,13 @@ CONFIG_MAP = {
 def get_config():
     """Retorna a classe de configuração conforme o ambiente ativo."""
     env = config("APP_ENV", default="development")
-    return CONFIG_MAP.get(env, DevelopmentConfig)
+    if env not in CONFIG_MAP:
+        raise RuntimeError("APP_ENV inválido: use development, testing ou production.")
+    if env == "production":
+        if len(ProductionConfig.SECRET_KEY) < 32:
+            raise RuntimeError("SECRET_KEY deve ter pelo menos 32 caracteres em produção.")
+        if not ProductionConfig.RATELIMIT_STORAGE_URI.startswith(("redis://", "rediss://")):
+            raise RuntimeError("Configure RATELIMIT_STORAGE_URI compartilhado (Redis) em produção.")
+        if not config("DATABASE_URL", default=""):
+            raise RuntimeError("Configure DATABASE_URL persistente em produção.")
+    return CONFIG_MAP[env]

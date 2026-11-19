@@ -173,3 +173,4 @@
         max-width: 1400px;
     }
 }
+@media (max-width: 768px){.navbar__nav{visibility:hidden}.navbar__nav--aberto{visibility:visible}}
