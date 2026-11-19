@@ -115,3 +115,7 @@ Página específica para a Barbearia, com apresentação comercial, desafio, ben
 ## Cards do painel da Barbearia
 
 Adicionada à página da Barbearia a seção “Muito mais que agendamentos”, com oito cards e ícones para as áreas verificadas na cópia demonstrativa: visão geral, agendamentos, serviços, profissionais, planos, financeiro, despesas e configurações. As imagens e a chamada de orçamento existentes foram mantidas. No navegador, a grade apresentou quatro colunas em 1280 px, duas em 768 px e uma em 375 px, sem rolagem horizontal nessas larguras. A suíte automatizada passou com 25 testes. Nenhum banco ou outro projeto foi alterado; sem deploy.
+
+## Diagnóstico e preparação de sincronização
+
+Em 19/11/2026, produção executa commit 02fba78, igual ao código local antes desta etapa. Home e portfólio públicos aparecem vazios; painel redireciona anônimos ao login. Consulta somente de contagem no PostgreSQL: zero serviços, projetos, imagens e administradores; migração 4865ca9e0b21. SQLite local: seis serviços publicados, Barbearia publicada com quatro imagens e dois projetos em rascunho. Preparados comandos explícitos para criar apenas o primeiro administrador via variáveis temporárias e importar catálogo sem sobrescrever registros existentes, com testes isolados. Nenhum dado de produção alterado nesta etapa; executar somente após novo deploy e verificação de segurança e backup.

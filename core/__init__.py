@@ -109,6 +109,7 @@ def init_extensions(app: Flask) -> None:
 
 def register_cli(app):
     import click
+    import os
     from werkzeug.security import generate_password_hash
     from core.models import Administrador
     from core.extensions import db
@@ -179,6 +180,45 @@ def register_cli(app):
         db.session.add(Administrador(usuario=usuario.strip(), senha_hash=generate_password_hash(password)))
         db.session.commit()
         click.echo("Administrador criado.")
+
+    @app.cli.command("bootstrap-admin-env")
+    def bootstrap_admin_env():
+        """Cria o primeiro administrador uma única vez a partir do ambiente."""
+        if Administrador.query.first() is not None:
+            click.echo("Já existe administrador; nenhum dado foi alterado.")
+            return
+        usuario = os.environ.get("HS_ADMIN_USER", "").strip()
+        senha = os.environ.get("HS_ADMIN_PASSWORD", "")
+        if not usuario or len(usuario) > 50 or not 12 <= len(senha) <= 1024:
+            raise click.ClickException("Configure HS_ADMIN_USER e HS_ADMIN_PASSWORD (senha de 12 a 1024 caracteres).")
+        db.session.add(Administrador(usuario=usuario, senha_hash=generate_password_hash(senha)))
+        db.session.commit()
+        click.echo("Administrador inicial criado. Remova as variáveis temporárias do ambiente.")
+
+    @app.cli.command("importar-catalogo-inicial")
+    def importar_catalogo_inicial():
+        """Adiciona serviços e projetos ausentes, preservando registros existentes."""
+        import json
+        from pathlib import Path
+        from core.models import Servico, Projeto, ImagemProjeto
+        dados = json.loads((Path(app.root_path).parent / "scripts" / "catalogo_inicial.json").read_text(encoding="utf-8"))
+        criados = 0
+        for item in dados["servicos"]:
+            if not Servico.query.filter_by(slug=item["slug"]).first():
+                db.session.add(Servico(**item))
+                criados += 1
+        for item in dados["projetos"]:
+            if Projeto.query.filter_by(slug=item["slug"]).first():
+                continue
+            registro = dict(item)
+            imagens = registro.pop("galeria")
+            projeto = Projeto(**registro)
+            db.session.add(projeto)
+            for caminho in imagens:
+                db.session.add(ImagemProjeto(projeto=projeto, caminho=caminho))
+            criados += 1
+        db.session.commit()
+        click.echo(f"{criados} registro(s) criado(s); registros existentes foram preservados.")
 
 
 

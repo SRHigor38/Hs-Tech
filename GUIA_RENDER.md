@@ -1,5 +1,13 @@
 # Roteiro de configuração na Render — não executado
 
+## Sincronização inicial do catálogo e do administrador
+
+O código oferece `python -m flask --app app importar-catalogo-inicial`, que adiciona apenas serviços e projetos de `scripts/catalogo_inicial.json` cujos slugs não existam. Ele não atualiza projetos, serviços ou galerias já existentes; a Barbearia é apresentada como demonstrativa e os outros dois projetos permanecem em rascunho. A transferência não inclui contas, solicitações, dados pessoais ou links para demonstrações interativas. Verifique o conteúdo e faça backup do PostgreSQL antes de executar.
+
+Para criar apenas o primeiro administrador, defina temporariamente `HS_ADMIN_USER` e `HS_ADMIN_PASSWORD` nas variáveis protegidas do serviço Render e execute, no Shell do serviço, `python -m flask --app app bootstrap-admin-env`. Use senha única com pelo menos 12 caracteres. O comando grava somente o hash e não modifica nenhuma conta existente. Após o sucesso, remova ambas as variáveis temporárias da Render. Nunca coloque credenciais no Git, em comandos ou no chat. Em serviços já ativos, planeje uma reinicialização após alteração das variáveis. Alternativamente, o comando interativo `create-admin` não exige variáveis persistentes.
+
+Em 19/11/2026, a inspeção da produção mostrou código 02fba78, migração 4865ca9e0b21 e zero registros em serviços, projetos, imagens de galeria e administradores. As informações precisam ser reconferidas imediatamente antes da importação; não se deve pressupor que continuarão vazias.
+
 **Não sincronize o Blueprint, crie serviços ou faça deploy antes da autorização explícita.** Criar um web service ou sincronizar um Blueprint pode iniciar a primeira publicação e gerar cobranças; `autoDeployTrigger: off` apenas desativa deploys automáticos posteriores.
 
 ## Escolha de arquitetura e custos

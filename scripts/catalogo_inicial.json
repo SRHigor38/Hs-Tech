@@ -1,0 +1,119 @@
+{
+  "servicos": [
+    {
+      "slug": "sites-profissionais",
+      "nome": "Sites profissionais",
+      "descricao": "Sites modernos, responsivos e personalizados para apresentar negócios e fortalecer sua presença digital.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Layout responsivo\nPresença digital profissional",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    },
+    {
+      "slug": "landing-pages",
+      "nome": "Landing pages",
+      "descricao": "Páginas estratégicas para apresentar produtos, serviços e campanhas.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Comunicação focada\nPágina adaptada para celulares",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    },
+    {
+      "slug": "sistemas-web",
+      "nome": "Sistemas web",
+      "descricao": "Sistemas personalizados para organizar informações, clientes, agendamentos e processos.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Organização de informações\nProcessos adaptados ao negócio",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    },
+    {
+      "slug": "lojas-virtuais",
+      "nome": "Lojas virtuais",
+      "descricao": "Soluções de comércio eletrônico para apresentar produtos e facilitar vendas online.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Catálogo de produtos\nExperiência de compra online",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    },
+    {
+      "slug": "automacoes",
+      "nome": "Automações",
+      "descricao": "Automatização de processos repetitivos e integração de funcionalidades digitais.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Menos tarefas repetitivas\nIntegração de processos",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    },
+    {
+      "slug": "manutencao-evolucao-software",
+      "nome": "Manutenção e evolução de software",
+      "descricao": "Correções, melhorias e novas funcionalidades em sites e sistemas.",
+      "icone": "code",
+      "cor": "#0A84FF",
+      "beneficios": "Correção de problemas\nEvolução de funcionalidades",
+      "ordem": 0,
+      "status_publicacao": "publicado"
+    }
+  ],
+  "projetos": [
+    {
+      "slug": "demonstracao-barbearia",
+      "nome": "Sua Barbearia",
+      "descricao_curta": "Facilite a escolha de horários para seus clientes e acompanhe os agendamentos em uma plataforma prática e organizada.",
+      "descricao_completa": "Sua barbearia organizada, seus agendamentos em um só lugar.",
+      "categoria": "Projeto demonstrativo",
+      "imagem_principal": "img/projetos/portfolio-demonstrativo/barbearia-capa.png",
+      "problema": "Quando os horários ficam espalhados em conversas e anotações, acompanhar a agenda pode ser mais difícil. Esta demonstração reúne a escolha do serviço e o registro do agendamento em uma plataforma, com um painel para consulta.",
+      "funcionalidades": "Apresentação dos serviços\nAgendamento por serviço, profissional, data e horário\nConfirmação do agendamento\nPainel de gestão com indicadores e agendamentos recentes",
+      "beneficios": "Clientes podem consultar os serviços e escolher horários disponíveis.\nAgendamentos ficam reunidos para consulta pelo responsável.\nO painel apresenta uma visão dos horários recentes e indicadores.",
+      "tecnologias": "Python, Flask, SQLAlchemy, SQLite, HTML, CSS e JavaScript",
+      "ordem": 0,
+      "status_publicacao": "publicado",
+      "link_demo": null,
+      "galeria": [
+        "img/projetos/portfolio-demonstrativo/barbearia-passo-1.svg",
+        "img/projetos/portfolio-demonstrativo/barbearia-passo-2.svg",
+        "img/projetos/portfolio-demonstrativo/barbearia-passo-3.svg",
+        "img/projetos/portfolio-demonstrativo/barbearia-passo-4.svg"
+      ]
+    },
+    {
+      "slug": "demonstracao-personal-trainer",
+      "nome": "Sistema para profissionais de treino",
+      "descricao_curta": "Demonstração local de alunos, exercícios e fichas de treino.",
+      "descricao_completa": "Projeto demonstrativo com áreas para profissional e aluno, dados fictícios e sessões temporárias. A versão isolada está em preparação e não está disponível publicamente.",
+      "categoria": "Sistemas web",
+      "imagem_principal": null,
+      "problema": "Organização de alunos, fichas e registros de treino.",
+      "funcionalidades": "Gestão de alunos\nFichas de treino e exercícios\nRegistro de sessões\nHistórico e acompanhamento",
+      "beneficios": "Organização das informações\nAcompanhamento das atividades",
+      "tecnologias": "Python, Flask, SQLAlchemy, SQLite",
+      "ordem": 0,
+      "status_publicacao": "rascunho",
+      "link_demo": null,
+      "galeria": []
+    },
+    {
+      "slug": "demonstracao-ecommerce",
+      "nome": "Demonstração de loja virtual",
+      "descricao_curta": "Exemplo local de loja com catálogo e pedidos simulados.",
+      "descricao_completa": "Demonstração independente com produtos fictícios e pedidos sem pagamento.",
+      "categoria": "E-commerce",
+      "imagem_principal": null,
+      "problema": "Apresentar produtos e organizar pedidos em um ambiente de demonstração.",
+      "funcionalidades": "Catálogo e pesquisa\nCarrinho e pedido simulado\nGestão de produtos, categorias, estoque e status",
+      "beneficios": "Exemplo de navegação e organização de um catálogo digital.",
+      "tecnologias": "Python, Flask, SQLite",
+      "ordem": 0,
+      "status_publicacao": "rascunho",
+      "link_demo": null,
+      "galeria": []
+    }
+  ]
+}
