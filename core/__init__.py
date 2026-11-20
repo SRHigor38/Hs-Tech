@@ -54,6 +54,9 @@ def create_app() -> Flask:
     register_cli(app)
     register_publication_guard(app)
 
+    from core.analytics import registrar_visita
+    app.after_request(registrar_visita)
+
     return app
 
 
@@ -219,6 +222,12 @@ def register_cli(app):
             criados += 1
         db.session.commit()
         click.echo(f"{criados} registro(s) criado(s); registros existentes foram preservados.")
+
+    @app.cli.command("atualizar-textos-comerciais")
+    def atualizar_textos_comerciais():
+        from core.services.textos_comerciais import atualizar_textos
+        quantidade = atualizar_textos()
+        click.echo(f"{quantidade} descrição(ões) atualizada(s); textos editados foram preservados.")
 
 
 

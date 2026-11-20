@@ -70,6 +70,17 @@ class ImagemProjeto(db.Model):
     projeto = db.relationship('Projeto', backref=db.backref('galeria', lazy='select', cascade='all, delete-orphan', order_by='ImagemProjeto.id'))
 
 
+class AcessoPagina(db.Model):
+    """Contagens por dia, página e identificador pseudônimo; sem IP."""
+    __tablename__ = 'acesso_pagina'
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.Date, nullable=False, index=True)
+    pagina = db.Column(db.String(50), nullable=False)
+    visitante = db.Column(db.String(64), nullable=False)
+    visualizacoes = db.Column(db.Integer, nullable=False, default=1)
+    __table_args__ = (db.UniqueConstraint('data', 'pagina', 'visitante', name='uq_acesso_dia_pagina_visitante'),)
+
+
 class Servico(db.Model):
     """Serviços oferecidos pela HS Tech."""
     __tablename__ = 'servico'

@@ -11,7 +11,7 @@ from flask import (
 )
 from flask_login import login_required
 from core.extensions import db
-from core.models import SolicitacaoOrcamento, Administrador, Projeto, Servico
+from core.models import SolicitacaoOrcamento, Administrador, Projeto, Servico, AcessoPagina
 
 
 solicitacoes_bp = Blueprint("solicitacoes", __name__)
@@ -20,6 +20,17 @@ solicitacoes_bp = Blueprint("solicitacoes", __name__)
 @solicitacoes_bp.route("/dashboard")
 @login_required
 def dashboard():
+    from sqlalchemy import func
+    from zoneinfo import ZoneInfo
+    hoje = datetime.now(ZoneInfo('America/Sao_Paulo')).date()
+    acessos = {}
+    for dias in (1, 7, 30):
+        inicio = hoje - timedelta(days=dias-1)
+        visualizacoes, visitantes = db.session.query(func.coalesce(func.sum(AcessoPagina.visualizacoes), 0), func.count(func.distinct(AcessoPagina.visitante))).filter(AcessoPagina.data >= inicio, AcessoPagina.data <= hoje).one()
+        acessos[dias] = {'visualizacoes': visualizacoes, 'visitantes': visitantes}
+    inicio = hoje - timedelta(days=29)
+    por_pagina = db.session.query(AcessoPagina.pagina, func.sum(AcessoPagina.visualizacoes)).filter(AcessoPagina.data >= inicio, AcessoPagina.data <= hoje).group_by(AcessoPagina.pagina).order_by(func.sum(AcessoPagina.visualizacoes).desc(), AcessoPagina.pagina).all()
+    por_dia = db.session.query(AcessoPagina.data, func.sum(AcessoPagina.visualizacoes)).filter(AcessoPagina.data >= inicio, AcessoPagina.data <= hoje).group_by(AcessoPagina.data).order_by(AcessoPagina.data).all()
     totais = {status: SolicitacaoOrcamento.query.filter_by(status=status).count() for status in ("novo", "em_analise", "em_negociacao", "aprovado", "recusado")}
     from collections import Counter
     dados = db.session.query(SolicitacaoOrcamento.data_recebimento, SolicitacaoOrcamento.tipo_solucao).all()
@@ -30,7 +41,7 @@ def dashboard():
         ("Solicitações por status", [("Novo", totais["novo"]), ("Em análise", totais["em_analise"]), ("Em negociação", totais["em_negociacao"]), ("Aprovado", totais["aprovado"]), ("Recusado", totais["recusado"])]),
         ("Tipos de solução", sorted(tipos.items(), key=lambda item: (-item[1], item[0])))
     ]
-    return render_template("admin/dashboard.html", totais=totais, total=len(dados), projetos=Projeto.query.filter_by(status_publicacao="publicado").count(), servicos=Servico.query.count(), recentes=SolicitacaoOrcamento.query.order_by(SolicitacaoOrcamento.data_recebimento.desc()).limit(5).all(), graficos=graficos)
+    return render_template("admin/dashboard.html", totais=totais, total=len(dados), projetos=Projeto.query.filter_by(status_publicacao="publicado").count(), servicos=Servico.query.count(), recentes=SolicitacaoOrcamento.query.order_by(SolicitacaoOrcamento.data_recebimento.desc()).limit(5).all(), graficos=graficos, acessos=acessos, paginas_acesso=por_pagina, dias_acesso=[(data.strftime('%d/%m'), total) for data,total in por_dia])
 
 
 @solicitacoes_bp.route("/")
